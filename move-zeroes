@@ -1,0 +1,32 @@
+https://leetcode.com/problems/move-zeroes
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int start = 0, end = 0;
+        while( end < nums.size())
+        {
+            while(end < nums.size() and nums[end] == 0)
+            end++;
+            if(end != nums.size())
+            swap(nums[start],nums[end]);
+            start++;
+            end++;
+
+        }
+  }
+};
+
+
+/*
+p.s:
+we have to move to left end 
+while shifting all element to right side maintaining the relative order.
+
+it could be eaily be done using 
+making duplicate array
+solving in O(n^2)
+
+but solving in O(n) is little bit tricky 
+here we can use two pointer approach.
+*/
