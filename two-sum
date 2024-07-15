@@ -1,0 +1,28 @@
+https://leetcode.com/problems/two-sum
+
+
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int tg) {
+        unordered_map<int,int> mp;
+        for(int i = 0;i < nums.size();i++)
+        {
+            int req = tg-nums[i];
+            if(mp[req] != 0)
+            return {i,mp[req]-1};
+
+            mp[nums[i]] = i+1;
+
+        }
+        return {};
+        
+    }
+};
+
+/*
+ps:
+there is only one pair present which sums up to give target value 
+soln:
+it is classic problem we have to use map to check if remaining is present in map or not 
+*/
