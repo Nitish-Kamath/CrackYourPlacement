@@ -1,0 +1,33 @@
+https://leetcode.com/problems/container-with-most-water
+
+class Solution {
+public:
+    int maxArea(vector<int>& nums) {
+        
+        int start = 0;
+        int end = nums.size() - 1;
+        int maxi = 0;
+
+        while(start < end)
+        {
+
+            int area  = min(nums[end],nums[start]) * (end - start);
+            maxi = max(maxi,area);
+            if(nums[start] <= nums[end])
+            start++;
+            else 
+            end--;
+        }
+        return maxi;
+    }
+};
+
+
+/*
+ps: 
+we have to select two tower at end so that water content is max 
+
+solution:
+its intuition is hard to get the concept that move from that side which has lesser height.
+
+*/
