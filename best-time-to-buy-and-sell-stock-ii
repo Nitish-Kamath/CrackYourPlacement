@@ -1,0 +1,26 @@
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& nums) {
+
+        int sum = 0;
+        for(int i = 1;i < nums.size();i++)
+        {
+            if(nums[i] > nums[i-1])
+            sum += nums[i] - nums[i-1];
+        }
+        return sum;
+
+
+    }
+};
+
+/*
+it is quite easy 
+if we do calculation on paper 
+you will get to know that things get cancel out 
+
+so at end you will see that if consecutive days diff is positive then add it to sum
+*/
