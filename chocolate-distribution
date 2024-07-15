@@ -1,0 +1,29 @@
+https://www.geeksforgeeks.org/problems/chocolate-distribution-problem3825/1
+
+class Solution{
+    public:
+    long long findMinDiff(vector<long long> a, long long n, long long m){
+
+    sort(a.begin(),a.end());
+    int mini = INT_MAX;
+    for(int i = 0 ;i < n-m+1;i++ )
+    {
+        int diff = a[i + m-1] - a[i];
+        mini = min(mini,diff);
+    }
+    return mini;
+    
+    }   
+};
+
+
+/*
+ps:
+Here we have to select m packet out of n packet 
+such that diff is minm
+
+soln:
+it is preety easy sorting question 
+here we have to sort and then take diff and use mini variable to get required result.
+
+*/
