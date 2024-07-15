@@ -1,0 +1,25 @@
+https://leetcode.com/problems/remove-duplicates-from-sorted-array
+
+
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+
+      map<int,int> mp;
+
+      for(auto x : nums)
+      mp[x]++;
+
+      int i = 0;
+      for(auto x : mp)
+      nums[i++] = x.first;
+
+      return mp.size();
+    }
+};
+
+/*
+soln:
+Since there is no constraint on space 
+so using map we can easily solve it.
+*/
