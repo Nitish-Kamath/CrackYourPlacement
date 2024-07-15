@@ -1,0 +1,37 @@
+https://leetcode.com/problems/subarray-sums-divisible-by-k
+
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        
+        unordered_map<int,int> mp;
+         mp[0] = 1;
+         int sum = 0;
+         int rdr = 0;
+         int count = 0;
+
+
+         for(auto x : nums)
+         {
+            sum = sum + x;
+            rdr = sum % k;
+            if(rdr < 0)
+            rdr = rdr + k;
+            count += mp[rdr];
+            mp[rdr]++;
+         }
+         return count;
+    }
+};
+
+
+/*
+ps:
+we have given array and we have to count for number of subarray that are divisible by k 
+
+solution:
+simple concept is if a sum is divided by k -> gives remainder r 
+if after addition of certain number to sum also given same remainder it means that that sum is exactly divisible by k 
+
+*/
