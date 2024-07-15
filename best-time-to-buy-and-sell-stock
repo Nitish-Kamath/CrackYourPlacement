@@ -1,0 +1,35 @@
+https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+
+
+class Solution {
+public:
+    int maxProfit(vector<int>& nums) {
+
+        int start = 0, end = 0, profit = 0,maxi = 0;
+        while(end < nums.size())
+        {
+            if(nums[end] < nums[start])
+            nums[start] = nums[end];
+
+            profit = nums[end] - nums[start];
+            maxi = max(maxi,profit);
+            end++;
+
+
+        }
+        return maxi;
+    }
+};
+
+
+/*
+ps:
+we are allowed for only one transaction 
+so we have to find max profit 
+
+soln:
+here it could be solved using two pointer approach
+whenever a smaller values comes we make them as start value 
+and calculation profit for each instance 
+and using maxi variable to get required result.
+*/
