@@ -1,0 +1,49 @@
+https://leetcode.com/problems/set-matrix-zeroes
+
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        
+        int m = matrix.size();
+        int n = matrix[0].size();
+        stack<pair<int,int>> st;
+
+        for(int i = 0 ;i < m;i++)
+        {
+            for(int j = 0; j < n;j++)
+            {
+            if(matrix[i][j] == 0)
+            st.push({i,j});
+
+            }
+        }
+        while(!st.empty())
+        {
+            auto it = st.top();
+            st.pop();
+            int row = it.first;
+            int col = it.second;
+
+            for(int i = 0;i < n;i++)
+                matrix[row][i]= 0;
+
+            for(int j = 0 ;j < m;j++)
+                 matrix[j][col] = 0;
+        }
+    }
+
+};
+
+
+/*
+ps:
+for every zero element, we have to make corresponding row and col as zero.
+
+soln:
+seeing constraint 
+we can easily do it using stack 
+here if we use map 
+then we cann't make row as key and col as value [think of it]
+
+*/
