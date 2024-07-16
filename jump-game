@@ -1,0 +1,34 @@
+https://leetcode.com/problems/jump-game
+
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+
+        int max_reach = 0;
+        int n = nums.size();
+
+        for(int i = 0 ;i < nums.size();i++)
+        {
+            if(max_reach < i)return false;
+            max_reach = max(max_reach ,i +  nums[i]);
+            if(max_reach >= n-1)
+            return true;
+        }
+        return false;
+        
+    }
+};
+
+
+/*
+ps:
+we have to check if we can reach at end or not 
+
+solution:
+here we will use variable max_reach that will tell if we can reach end or not 
+if yes return true
+if no return false
+
+at each instance we have to update the value of max_reach
+*/
