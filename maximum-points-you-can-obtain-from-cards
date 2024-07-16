@@ -1,0 +1,43 @@
+https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards
+
+
+class Solution {
+public:
+    int maxScore(vector<int>& nums, int k) {
+
+        int start = 0,end = 0,sum = 0,tot_sum = 0, maxi = 0;
+        int n = nums.size();
+
+        for(auto x : nums)
+        tot_sum += x;
+
+        if(k == n)
+        return tot_sum;
+
+
+        while(end < nums.size())
+        {
+            sum += nums[end];
+
+            if(end - start + 1 == n-k)
+            {
+                maxi = max(maxi,(tot_sum - sum));
+                sum -= nums[start];
+                start++;
+            }
+            end ++;
+        }
+        return maxi;
+    }
+};
+
+/*
+ps:
+It state that we have to maximise the sum value for element taken from end
+
+soln:
+This could be easily be solved using simple logic that 
+in fact we have to take sum for element from tot_size - k
+and subtract that sum from total_sum   
+
+*/
