@@ -1,0 +1,51 @@
+https://leetcode.com/problems/4sum
+
+
+class Solution {
+public:
+typedef long long ll;
+set<vector<int>> st;
+
+void helper2(vector<int> &nums, int idx1,int idx2, ll sum, ll tg)
+{
+    ll req = tg - sum;
+    int start = idx2 + 1;
+    int end = nums.size() - 1;
+    while(start < end)
+    {
+        ll sum = nums[start] + nums[end];
+        if(sum > req)
+        end--;
+        else if(sum < req)
+        start++;
+        else 
+        {
+            st.insert({nums[idx1],nums[idx2],nums[start],nums[end]});
+            end--;
+
+        }
+        
+    }
+}
+void helper1(vector<int> &nums,int idx1, ll tg)
+{
+    for(int i = idx1 + 1;i < nums.size();i++)
+    {
+        ll sum = nums[idx1] + nums[i];
+        helper2(nums,idx1,i,sum,tg);
+
+    }
+
+}
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+
+        sort(nums.begin(),nums.end());
+
+        for(int i = 0; i < nums.size();i++)
+             helper1(nums,i,target);
+
+        vector<vector<int>> res(st.begin(),st.end());
+        return res;
+        
+    }
+};
