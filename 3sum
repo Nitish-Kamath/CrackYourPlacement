@@ -1,0 +1,54 @@
+https://leetcode.com/problems/3sum
+
+class Solution
+{
+public:
+    vector<vector<int>> threeSum(vector<int> &num)
+    {
+        vector<vector<int>> res;
+
+        int len = num.size();
+        if (len < 3)
+            return res;
+
+        sort(num.begin(), num.end());
+
+        for (int i = 0; i < (num.size()) - 2; i++)
+        {
+
+            if (i == 0 || (i > 0 && num[i] != num[i - 1]))
+            {
+
+                int left = i + 1;
+                int right = num.size() - 1;
+                int sum = -num[i];
+
+                while (left < right)
+                {
+                    if (num[left] + num[right] == sum)
+                    {
+
+                        vector<int> temp;
+                        temp.push_back(num[i]);
+                        temp.push_back(num[left]);
+                        temp.push_back(num[right]);
+                        res.push_back(temp);
+
+                        while (left < right && num[left] == num[left + 1])
+                            left++;
+                        while (left < right && num[right] == num[right - 1])
+                            right--;
+
+                        left++;
+                        right--;
+                    }
+                    else if (num[left] + num[right] < sum)
+                        left++;
+                    else
+                        right--;
+                }
+            }
+        }
+        return res;
+    }
+};
