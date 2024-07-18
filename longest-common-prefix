@@ -1,0 +1,54 @@
+https://leetcode.com/problems/longest-common-prefix
+
+
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+
+        int min_len = INT_MAX;
+        int idx = -1;
+        for(auto x : strs)
+        {
+            int len = x.size();
+            min_len = min(min_len,len);
+        }
+        int i;
+        for( i = 0;i< min_len;i++)
+        {
+            char ch = strs[0][i];
+            for(int j = 1;j < strs.size();j++)
+            {
+
+                if(strs[j][i] != ch)
+                {
+                    idx = i;
+                    break;
+                }
+            }
+            if(idx != -1)
+            break;
+        }
+        if(i == min_len)
+        return strs[0].substr(0,min_len);
+        if(idx != -1)
+        return strs[0].substr(0,idx);
+
+        
+        return "";
+
+    
+    
+    }
+};
+
+
+/*
+ps:
+It is very simple here we have to find longest common prefix 
+soln01:
+using map
+
+soln02:
+using nested loop 
+
+*/
