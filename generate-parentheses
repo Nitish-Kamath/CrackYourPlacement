@@ -1,0 +1,55 @@
+https://leetcode.com/problems/generate-parentheses
+
+
+class Solution {
+public:
+vector<string> res;
+void helper(int open, int close, string temp)
+{
+    if(open == 0 and close == 0)
+    {
+        res.push_back(temp);
+        return;
+
+    }
+    if(open!=0)
+    {
+        string op1 = temp;
+        op1.push_back('(');
+        helper(open-1,close,op1);
+
+
+    }
+    if(close > open)
+    {
+        string op2 = temp;
+        op2.push_back(')');
+        helper(open,close-1,op2);
+
+    }
+
+}
+    vector<string> generateParenthesis(int n) {
+
+        string temp = "";
+        helper(n,n,temp);
+        return res;
+        
+    }
+};
+
+
+/*
+ps is very simple for given value of n 
+we have to generate balanced parenthesis
+NOTE:
+using recursion of 
+() + _
+_ +() 
+(_)
+you cann't generate all string 
+think of case like 
+n == 4 (())(())
+n == 5 ()()()(())
+
+*/
