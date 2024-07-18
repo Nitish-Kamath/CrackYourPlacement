@@ -1,0 +1,30 @@
+https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string
+
+class Solution {
+public:
+    int strStr(string str, string s) {
+        int m = str.size();
+        int n = s.size();
+
+        for(int i = 0;i < m - n + 1;i++)
+        {
+            string temp = str.substr(i,n);
+            if(temp == s)
+            return i;
+        }
+
+        return -1;
+        
+    }
+};
+
+/*
+ps:
+it is very simple we have to basically first first index of needle in haystack
+
+soln01:
+using built in function 
+soln02:
+using traversing and find substr and comparing 
+
+*/
