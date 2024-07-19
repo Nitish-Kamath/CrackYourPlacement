@@ -1,0 +1,67 @@
+https://leetcode.com/problems/integer-to-roman
+class Solution {
+public:
+    string intToRoman(int num) {
+        map<int,string> mp;
+        vector<string> vt;
+        mp[0] = "";
+        mp[1] = "I";
+        mp[2] = "II";
+        mp[3] = "III";
+        mp[4] = "IV";
+        mp[5] = "V";
+        mp[6] = "VI";
+        mp[7] = "VII";
+        mp[8] = "VIII";
+        mp[9] = "IX";
+        mp[10] = "X";
+        mp[20] = "XX";
+        mp[30] = "XXX";
+        mp[40] = "XL";
+        mp[50] = "L";
+        mp[60] = "LX";
+        mp[70] = "LXX";
+        mp[80] = "LXXX";
+        mp[90] = "XC";
+        mp[100] = "C";
+        mp[200] = "CC";
+        mp[300] = "CCC";
+        mp[400] = "CD";
+        mp[500] = "D";
+        mp[600] = "DC";
+        mp[700] = "DCC";
+        mp[800] = "DCCC";
+        mp[900] = "CM";
+        mp[1000] = "M";
+        mp[2000] = "MM";
+        mp[3000] = "MMM";
+
+    int k = 1;
+    string res = "";
+    while(num)
+    {
+        int a = num % 10;
+        int req = a * k;
+        vt.push_back(mp[req]);
+        num = num/10;
+        k = k * 10;
+    }
+    reverse(vt.begin(),vt.end());
+    for(auto x : vt)
+    res +=x;
+    return res;
+
+    }
+};
+
+
+
+/*
+ps:
+It says that we have given a decimal value and we have to convert into integer value 
+soln:
+main hack is to create map effectively 
+create map from 1 to 9 and every multiple of 10 till constraint.
+
+
+*/
