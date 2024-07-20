@@ -1,0 +1,45 @@
+https://leetcode.com/problems/group-anagrams/
+
+
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        
+        vector<vector<string>> master;
+        vector<string> temp;
+        unordered_map<string,vector<int>> mp;
+
+        
+        for(int i = 0;i < strs.size();i++)
+        {
+            string str = strs[i];
+            sort(str.begin(),str.end());
+            mp[str].push_back(i);
+        }
+
+        for(auto x : mp)
+        {
+            auto idx = x.second;
+            temp.clear();
+            for(int i = 0;i < idx.size();i++)
+            {
+                temp.push_back(strs[idx[i]]);
+            }
+            master.push_back(temp);
+        }
+        return master;
+    }
+};
+
+
+/*
+soln:
+
+It is pretty straight question 
+we will traverse through strs, make a copy of each string, sort it and will put into map along with idx 
+so in map we will get idx of all anagrams 
+
+so we will traverse the map and will get idx 
+and will get c/s strs[i]
+
+*/
