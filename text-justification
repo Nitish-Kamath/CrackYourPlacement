@@ -1,0 +1,84 @@
+https://leetcode.com/problems/text-justification
+
+class Solution {
+public:
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+        int n = (int) words.size();
+        vector<pair<int, int>> lines(n);
+        vector<int> lengths;
+        vector<string> ans;
+        for(auto s : words) lengths.push_back((int) s.length());
+        int idx = 0;
+        int line_idx = 0;
+        while(idx < n){
+            lines[line_idx].first = idx;
+            int w = maxWidth;
+            while(idx < n){
+                if(w == maxWidth){
+                    w -= lengths[idx];
+                    idx++;
+                    continue;
+                }
+                if(w - (lengths[idx] + 1) >= 0) {
+                    w -= (lengths[idx] + 1);
+                    idx++;
+                } else {
+                    lines[line_idx].second = idx - 1;
+                    line_idx++;
+                    break;
+                }
+            }
+            lines[line_idx].second = idx - 1;
+        }
+        for(int i = 0; i <= line_idx; i++){
+            int l = lines[i].first;
+            int r = lines[i].second;
+            int words_length = 0;
+            for(int j = l; j <= r; j++){
+                words_length += lengths[j];
+            }
+            int spaces_for_space = maxWidth - words_length;
+            int num_spaces = r - l;
+            int space_for_each, remainder;
+            if(num_spaces) {
+                space_for_each = spaces_for_space / num_spaces;
+                remainder = spaces_for_space % num_spaces;
+            }
+            else {
+                space_for_each = spaces_for_space;
+                remainder = 0;
+            }
+            string concactenated_space = "";
+            for(int j = 0; j < space_for_each; j++) concactenated_space += ' ';
+            string line = "";
+            if(l == r){
+                line += words[l];
+                line += concactenated_space;
+            }else if (i == line_idx){
+                for(int j = l; j <= r; j++){
+                    line += words[j];
+                    if(j < r){
+                        line += ' ';
+                        spaces_for_space--;
+                    }else{
+                        while(spaces_for_space){
+                            line += ' ';
+                            spaces_for_space--;
+                        }
+                    }
+                }
+            }else{
+                for(int j = l; j <= r; j++){
+                    line += words[j];
+                    if(j < r) line += concactenated_space;
+                    if(remainder > 0) {
+                        line += ' ';
+                        remainder--;
+                    }
+                }
+            }
+            ans.push_back(line);
+        }
+        return ans;
+    }
+};
