@@ -1,0 +1,65 @@
+https://leetcode.com/problems/add-binary
+
+
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        
+        int n1 = a.size() - 1;
+        int n2 = b.size() - 1;
+
+        int temp = 0, carry = 0;
+        string res = "";
+
+        while(n1 >= 0 and n2 >= 0)
+        {
+            temp = carry + (a[n1] - '0') + (b[n2] - '0');
+            res += to_string(temp%2);
+            carry = temp/2;
+            
+            n1--;
+            n2--;
+        }
+
+        while(n1>=0)
+        {
+            temp = carry + (a[n1] - '0');
+            res = res + to_string(temp%2);
+            carry = temp/2;
+            n1--;
+
+        }
+
+        while(n2 >= 0)
+        {
+            temp = carry + (b[n2] - '0');
+            res = res + to_string(temp % 2);
+            carry = temp/2;
+            n2--;
+        }
+
+        if(carry)
+        res += to_string(carry);
+
+        reverse(res.begin(),res.end());
+        return res;
+       
+    }
+};
+
+
+/*
+ps:
+we are given two string a and b 
+and we have to sum them and return the resultant string 
+
+soln01:
+we can convert string into c/s integer then will add and convert the result to string and return it 
+used this method but gives error for stoi() => as it cann't handle large interger 
+
+
+soln02:
+we will take help of carry variale and write rule of addition 
+
+
+*/
