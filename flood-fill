@@ -1,0 +1,35 @@
+https://leetcode.com/problems/flood-fill
+
+
+class Solution {
+public:
+void helper(vector<vector<int>>& mat, int i, int j, int m, int n, int req_color, int color)
+{
+    if(i < 0 or j < 0 or i >= m or j >= n or mat[i][j] != req_color or mat[i][j] == color)
+    return;
+    mat[i][j] = color;
+    helper(mat,i,j+1,m,n,req_color,color);
+    helper(mat,i+1,j,m,n,req_color,color);
+    helper(mat,i,j-1,m,n,req_color,color);
+    helper(mat,i-1,j,m,n,req_color,color);
+
+}
+    vector<vector<int>> floodFill(vector<vector<int>>& mat, int sr, int sc, int color) {
+
+         helper(mat,sr,sc,mat.size(),mat[0].size(),mat[sr][sc],color);
+         return mat;
+        
+    }
+};
+
+
+/*
+ps:
+We have to flood fill we have to choose initial color and propogate to the whole matrix
+soln:
+Basically we will do dfs call 
+
+start:
+dfs call in all four direction 
+
+*/
