@@ -1,0 +1,28 @@
+https://leetcode.com/problems/minimum-moves-to-equal-array-elements
+
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n = nums.size();
+        int sum = 0;
+
+        for(int i = 1;i < n;i++)
+            sum += nums[i] - nums[0];
+        return sum;
+    }
+};
+
+/*
+ps:
+very simple, we have to make every element equal for nums of size n 
+at each move we can only incrase n-1 element by 1 
+soln:
+if you do some maths then you reach at calculation that 
+we have to take diff of each element with first element 
+and sum of these diff value
+at end return the sum value 
+
+start:
+sort -> reach to first element 
+*/
