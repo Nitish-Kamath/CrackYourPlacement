@@ -1,0 +1,61 @@
+https://leetcode.com/problems/number-of-islands
+
+class Solution {
+public:
+void helper(vector<vector<int>>&mat,int i, int j, int m, int n, int count)
+{
+
+    if(i < 0 or j < 0 or i >= m or j >= n or mat[i][j] == count or mat[i][j] == 0)
+    return;
+    mat[i][j] = count;
+    helper(mat,i,j+1,m,n,count);
+    helper(mat,i+1,j,m,n,count);
+    helper(mat,i,j-1,m,n,count);
+    helper(mat,i-1,j,m,n,count);
+
+
+}
+    int numIslands(vector<vector<char>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int count = 1;
+        vector<vector<int>> mat(m,vector<int>(n,0));
+    
+
+        for(int i = 0;i < m;i++)
+        {
+            for(int j = 0;j < n;j++)
+            {
+                if(grid[i][j] == '1')
+                mat[i][j] = 1;
+            }
+        }     
+
+        for(int i = 0;i< m;i++)
+        {
+            for(int j = 0;j < n;j++)
+            {
+                if(mat[i][j] == 1)
+                {
+                    count++;
+                    helper(mat,i,j,m,n,count);
+                }
+            }
+        }   
+        return count -1;
+    }
+};
+
+
+/*
+ps:
+We have to count for only number of island 
+and lsland are four connected 
+
+soln:
+so what we can do 
+we can make a 0/1 matrix 
+and do dfs call 
+to make them visited we will make them 2 
+
+*/
