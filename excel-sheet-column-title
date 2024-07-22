@@ -1,0 +1,32 @@
+https://leetcode.com/problems/excel-sheet-column-title
+
+class Solution {
+public:
+    string convertToTitle(int nums) {
+        
+    string res = "";
+    while (nums)
+    {
+        char ch = (nums - 1) % 26 + 'A';
+        res = ch + res;
+        nums = (nums - 1) / 26;
+    }
+        return res;
+        
+    }
+};
+
+
+/*
+ps:
+we are given columnNumber and we have to return c/s column title 
+
+soln:
+we have to do it recursively 
+using while loop to get c/s idx of letter 
+and then eliminate the idx
+
+hack:
+01:while loop 
+02:(nums - 1) % 26 
+*/
