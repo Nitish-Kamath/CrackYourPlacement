@@ -1,0 +1,48 @@
+https://leetcode.com/problems/happy-number
+
+class Solution {
+public:
+    unordered_map<int,int> mp;
+    bool isHappy(int n) {
+
+        int sum = 0;
+
+        while(n)
+        {
+            int a = n % 10;
+            sum += a * a;
+            n = n/10;
+        }
+
+        if(sum == 1)
+            return true;
+        else 
+            {
+                if(mp[sum] != 0)
+                return false;
+
+                mp[sum]++;
+                return isHappy(sum);
+            }
+        return false;
+    }
+};
+
+/*
+ps: very simple 
+we have to do square of its digit and sum it and if sum equals 1 
+then return true;
+
+soln:
+if you do a little math then you come to know after doing steps on repetition 
+value repeats 
+it means that if value repeats then again same calculation go on 
+so to prevent it we will use map to check for repetation 
+if repetation comes just return false
+
+
+hack:
+01:map
+02:if value repeats return false;
+
+*/
