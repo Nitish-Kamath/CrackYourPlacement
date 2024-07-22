@@ -1,0 +1,35 @@
+https://leetcode.com/problems/missing-number
+
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        
+        int n = nums.size();
+        int xor_val = 0;
+        for(int i = 0;i <= n;i++)
+        xor_val = xor_val xor i;
+        cout<< xor_val << endl;
+
+        for(auto x : nums)
+        xor_val = xor_val xor x;
+
+        return xor_val;
+    }
+};
+
+/*
+ps:
+for array nums of size n 
+value range from 0 to n 
+so definately one number wil be missing find out that one 
+
+soln:
+we know that xor of same number cancels out and give zero as resultant value 
+so when we will xor of value ranges from 0 to nums.size() and then doing xor for all values from xor[i]
+we know common term will cancel out and remaining will be required missing number 
+
+hack: 
+01: xor 
+
+*/
