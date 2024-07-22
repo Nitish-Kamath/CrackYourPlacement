@@ -1,0 +1,66 @@
+https://leetcode.com/problems/reverse-pairs
+
+
+class Solution {
+ public:
+  int merge(int start, int mid, int end, vector<int>& nums) {
+    int count = 0;
+
+    vector<int> vt1;
+    vector<int> vt2;
+    vector<int> vt;
+    int j = mid + 1;
+    for (int i = start; i <= mid; i++) {
+      while (j <= end && nums[i] > 2L * nums[j]) j++;
+      count += (j - (mid + 1));
+    }
+
+    for (int i = start; i <= mid; i++) vt1.push_back(nums[i]);
+
+    for (int i = mid + 1; i <= end; i++) vt2.push_back(nums[i]);
+
+    int i = 0;
+    j = 0;
+    int len1 = vt1.size();
+    int len2 = vt2.size();
+
+    while (i < len1 and j < len2) {
+      if (vt1[i] < vt2[j])
+        vt.push_back(vt1[i++]);
+
+      else if (vt2[j] < vt1[i])
+        vt.push_back(vt2[j++]);
+
+      else {
+        vt.push_back(vt1[i++]);
+        vt.push_back(vt2[j++]);
+      }
+    }
+    while (i < len1) {
+      vt.push_back(vt1[i++]);
+    }
+    while (j < len2) {
+      vt.push_back(vt2[j++]);
+    }
+
+    int p = 0;
+    for (int i = start; i <= end; i++) nums[i] = vt[p++];
+
+    return count;
+  }
+
+  int mergeSort(int start, int end, vector<int>& nums) {
+    int val = 0;
+    if (start < end) {
+      int mid = (start + end) / 2;
+      val = mergeSort(start, mid, nums);
+      val += mergeSort(mid + 1, end, nums);
+      val += merge(start, mid, end, nums);
+    }
+    return val;
+  }
+
+  int reversePairs(vector<int>& nums) {
+    return mergeSort(0, nums.size() - 1, nums);
+  }
+};
