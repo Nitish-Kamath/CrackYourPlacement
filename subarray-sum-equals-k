@@ -1,0 +1,37 @@
+https://leetcode.com/problems/subarray-sum-equals-k
+
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+
+        unordered_map<int,int>mp;
+
+        int n = nums.size();
+        mp[0] = 1;
+
+        int sum = 0, res = 0;
+        for(int i = 0 ;i < n;i++)
+        {
+            sum += nums[i];
+            int rdr = sum - k;
+            if(mp[rdr]!= 0)
+            res += mp[rdr];
+            mp[sum]++;
+        }
+        return res;
+        
+    }
+};
+
+/*
+ps: given nums array and we have to count for total subarray which sums to gives k value 
+
+soln:
+since value may repeat so we have to make a map to check for that 
+and we will maintain map
+
+hack:
+01. mp 
+02. mp[sum]++
+
+*/
