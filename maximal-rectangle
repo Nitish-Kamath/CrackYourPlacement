@@ -1,0 +1,90 @@
+https://leetcode.com/problems/maximal-rectangle
+
+class Solution {
+public:
+int helper(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>left(n,0);
+         vector<int>right(n,0);
+         int maxi = 0;
+        stack<int>st;
+
+        for(int i = 0;i< n;i++)
+        {
+            while(!st.empty() and nums[i] <=  nums[st.top()]  )
+            st.pop();
+
+            if(st.empty())
+            left[i] = 0;
+            else
+            left[i] = st.top() + 1;
+            st.push(i);
+        }
+
+        while(!st.empty())
+        st.pop();
+
+        for(int i = n-1;i >= 0;i--)
+        {
+             while(!st.empty() and nums[i] <=  nums[st.top()]  )
+            st.pop();
+
+            if(st.empty())
+            right[i] = n-1;
+            else
+            right[i] = st.top() - 1;
+
+            st.push(i);
+        }
+
+        for(int i = 0;i < n;i++)
+             maxi = max(maxi,(nums[i] * (right[i] - left[i] + 1)));
+        return maxi;
+        
+    }
+    int maximalRectangle(vector<vector<char>>& mat) {
+
+        int m = mat.size();
+        int n = mat[0].size();
+
+        int maxi_= 0;
+        vector<int>temp(n,0);
+
+        for(int i = 0;i < m;i++)
+        {
+            for(int j= 0;j < n;j++)
+            {
+                if(mat[i][j] == '1')
+                temp[j] +=1;
+                else
+                temp[j] = 0;
+
+            }
+            maxi_= max(maxi_,helper(temp));
+        }
+
+        return maxi_;
+        
+    }
+};
+
+/*
+ps:
+https://leetcode.com/problems/largest-rectangle-in-histogram/
+same as above question 
+
+soln:
+this is extension here we have to move from top to bottom 
+for first row we will consider of given height 
+for second row now we will consider histrogram for both row 1 and row 2 
+for second row and onwards if val == '1' we will just add 1 to c/s height 
+if val == '0' we will make c/s height.
+
+hack:
+01. largest rectangle in histogram 
+02.find next smaller element from right and left using stack 
+
+
+
+
+*/
