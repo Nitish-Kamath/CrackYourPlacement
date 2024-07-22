@@ -1,0 +1,42 @@
+https://leetcode.com/problems/palindrome-number
+
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+
+        long long  sum = 0;
+        long long  x_= x;
+        if(x_< 0)
+        return false;
+        while(x)
+        {
+            int a = x % 10;
+            sum = sum * 10 + a;
+            x = x/10;
+        }
+        return x_ == sum ? true : false;
+    }
+};
+
+/*
+ps: very simple
+check if a number is palindrome or not 
+
+soln:
+we will use a while loop and check for it 
+
+what if:
+111
+001
+100 [considered invalid test case ] 
+-121
+-123
+
+hack:
+01. while loop 
+
+
+
+
+*/
