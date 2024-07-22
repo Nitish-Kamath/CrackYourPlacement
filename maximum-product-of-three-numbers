@@ -1,0 +1,32 @@
+https://leetcode.com/problems/maximum-product-of-three-numbers
+
+
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n = nums.size();
+        int val1 = nums[n-1] * nums[n-2] * nums[n-3];
+        int val2 = nums[0] * nums[1] * nums[n-1];
+        return max(val1,val2);
+        
+    }
+};
+
+/*
+ps:
+very simple we have to find max product of three number from given nums array 
+soln:
+we need to sort it and just take last three number 
+
+what if:
+all positive 
+all negative 
+some positive some negative 
+if all zeroes 
+
+hack:
+sort 
+what if mixture of positive and negative 
+
+*/
