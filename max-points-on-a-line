@@ -1,0 +1,46 @@
+https://leetcode.com/problems/max-points-on-a-line
+
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& nums) {
+    int n = nums.size();
+    if (n <= 2)
+    return n;
+
+   int count = 0, maxi = 0;
+    double sl,temp_sl;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            sl = (double)(nums[j][1] - nums[i][1]) / (nums[j][0] - nums[i][0]);
+            count = 0;
+
+            for (int k = 0 ; k < n; k++)
+            {
+                if(k != i and k != j)
+                {
+                    temp_sl = (double) (nums[k][1] - nums[i][1]) / (nums[k][0] - nums[i][0]);
+                    if (temp_sl == sl)
+                        count++;
+                }
+            }
+            count += 2;
+            maxi = max(maxi, count);
+        }
+    }
+    return maxi;     
+    }
+};
+
+/*
+ps:
+given we have nums array and we have to find max number of point that lie on same line 
+soln:
+by looking at constraint we can use a three nested loop 
+
+hack: 
+01. constraint
+
+*/
