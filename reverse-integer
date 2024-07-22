@@ -1,0 +1,46 @@
+https://leetcode.com/problems/reverse-integer
+
+
+class Solution {
+public:
+    int reverse(int x) {
+        int flag = 0;
+        long int sum = 0;
+        if(x < 0)
+        flag = 1;
+
+        x = abs(x);
+    
+        while(x)
+        {
+            int a = x % 10;
+            sum = sum * 10 + a;
+            if(sum > INT_MAX)
+            return 0;
+            x = x/10;
+        }
+        return flag == 1 ? -sum  : sum;
+        
+    }
+};
+/*
+ps:
+simply we have to reverse Interger 
+if negative return negative of reverse
+
+soln:
+using simply while loop we will will get last index and add to sum variable and simultaneously remove
+the last character 
+
+what if 
+go beyond 
+all zeroes 
+100 
+-001 
+119
+
+
+hack:
+01: while loop 
+
+*/
