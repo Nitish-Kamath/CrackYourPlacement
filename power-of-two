@@ -1,0 +1,40 @@
+https://leetcode.com/problems/power-of-two
+
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n<=0)
+        return false;
+        return (n & (n-1)) == 0 ? true: false;
+        
+    }
+};
+/*
+ps:
+we have to check if given number is power of two or not 
+
+
+
+soln:
+we know if we represent any number that is power of two
+then its msb is set to 1 and rest to zero 
+so if we take and with n -1 it should give zero 
+
+for other number 
+like 7 & 6 
+lsb for 7 is 1  => msb is 1 
+lsb for 6 is 0  => msb is 1 
+
+so when we will do and 
+msb will be 1 not 0 
+
+what if: 
+
+-2 
+0
+1
+7
+8
+
+*/
