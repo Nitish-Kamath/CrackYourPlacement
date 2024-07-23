@@ -1,0 +1,57 @@
+https://leetcode.com/problems/valid-square
+
+class Solution {
+     vector<vector<int>> diag;
+    public:
+    int distFinder(vector<int> p01, vector<int> p02)
+    {
+    return pow(p02[0] - p01[0], 2) + pow(p02[1] - p01[1], 2);
+    }
+
+public:
+    void pointPusher(vector<int> p01, vector<int> p02)
+    {
+
+    diag.push_back(p01);
+    diag.push_back(p02);
+    }
+public:
+    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+        if(p1 == p2 && p2 == p3 && p3 == p4)
+            return false;
+   
+    int diagEqual = 0, sideEqual = 0;
+
+    int dist01 = distFinder(p1, p2);
+    int dist02 = distFinder(p1, p3);
+    int dist03 = distFinder(p1, p4);
+
+    if (dist01 > dist02 && dist01 > dist03)
+    {
+        pointPusher(p1, p2);
+        pointPusher(p3, p4);
+    }
+    else if (dist02 > dist03)
+    {
+        pointPusher(p1, p3);
+        pointPusher(p2, p4);
+    }
+    else
+    {
+        pointPusher(p1, p4);
+        pointPusher(p2, p3);
+    }
+ 
+
+    if (distFinder(diag[0], diag[1]) == distFinder(diag[2], diag[3]))
+        diagEqual = 1;
+
+   if ((distFinder(diag[0], diag[2]) == distFinder(diag[0], diag[3])) && (distFinder(diag[0], diag[3]) == distFinder(diag[1], diag[2])) && (distFinder(diag[1], diag[2]) == distFinder(diag[1], diag[3])))
+        sideEqual = 1;
+
+    if (sideEqual == 1 && diagEqual == 1)
+    return true;
+return false;
+        
+    }
+};
