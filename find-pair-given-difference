@@ -1,0 +1,34 @@
+https://www.geeksforgeeks.org/problems/find-pair-given-difference1559/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+class Solution {
+  public:
+    int findPair(int n, int x, vector<int> &arr) {
+        
+        unordered_map<int,int> mp;
+        for(int i = 0; i < n;i++)
+        mp[arr[i]] = i + 1;
+        
+        for(int i = 0;i < n;i++)
+        {
+            if(arr[i] >= x)
+            {
+                
+            int req = arr[i] - x;
+            
+            if((mp[req] != 0) and (i != mp[req] - 1))
+            return 1;
+            }       
+        }
+        
+        return -1;
+    }
+};
+
+/*
+ps: very Simple 
+soln:
+If you go by using linear search then somewhow difficult 
+because we have to take diiff (thnk of a little bit)
+using map it is very easy 
+
+*/
