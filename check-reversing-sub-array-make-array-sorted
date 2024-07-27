@@ -1,0 +1,56 @@
+https://www.geeksforgeeks.org/check-reversing-sub-array-make-array-sorted
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+
+vector<int> nums{1,2,5,4,3};
+vector<int> vt;
+int n = nums.size();
+
+for(auto x : nums)
+vt.push_back(x);
+
+sort(vt.begin(),vt.end());
+int flag = 0;
+int idx1 = 0;
+int idx2 = 0;
+
+for(int i = 0; i< n;i++)
+{
+
+    if(nums[i] != vt[i] )
+    {
+        if(flag == 0)
+        {
+        idx1 = i;
+        flag = 1;
+        }
+        else 
+        {
+        idx2 = i;
+        break;
+
+        }
+
+    }
+
+}
+
+reverse(nums.begin() + idx1,nums.begin() + idx2 + 1);
+
+
+for(int i = 0;i < n;i++)
+{
+    if(nums[i] != vt[i])
+    {
+    cout<< false << endl;
+    break;
+    }
+}
+cout<< true;
+
+}
