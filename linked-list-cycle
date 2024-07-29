@@ -1,0 +1,54 @@
+https://leetcode.com/problems/linked-list-cycle
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_map<ListNode*,int> mp;
+        mp[head] = 1;
+
+        ListNode *temp  = head;
+
+        while(temp)
+        {
+            if(mp[temp -> next] != 0)
+            return true;
+            mp[temp->next] = 1;
+            temp = temp -> next;
+        }
+        return false;
+    }
+};
+
+
+/*
+ps:
+Given head of llist 
+and we have to reuturn if cycle present or not 
+
+if yes -> return true 
+if no  -> return false
+
+soln:
+we can maintain a map and store for all visited address
+
+what if:
+first 
+first to first 
+two
+two to first
+first second and third to third 
+
+hack: 
+01. use map 
+
+
+
+*/
