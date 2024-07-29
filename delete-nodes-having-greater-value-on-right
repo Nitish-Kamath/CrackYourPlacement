@@ -1,0 +1,68 @@
+https://www.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+
+class Solution
+{
+    public:
+    
+    Node *compute(Node *head)
+    {
+        stack<int> st;
+        Node *tmp = head;
+        int val = 0;
+        Node *res = new Node(0);
+        while(tmp)
+        {
+          val = tmp -> data;
+          while(!st.empty() and st.top() < val)
+            st.pop();
+            
+          st.push(val);
+          tmp = tmp -> next;
+          
+        }
+        Node *t1 = new Node(0);
+        Node *t2= new Node(0);
+        if(!st.empty())
+        {
+            t1 = new Node(st.top());
+            st.pop();
+            
+        }
+        
+        while(!st.empty())
+        {
+            t2 = new Node(st.top());
+            t2 -> next = t1;
+            t1 = t2;
+            st.pop();
+            
+        }
+        
+    return t1;
+        
+    }
+    
+};
+
+
+/*
+ps: 
+very simple we have to traverse linked list and delete element which is smaller than current
+element 
+
+soln:
+
+soln01:
+using monotonic stack 
+we will traverse the llist and push into stack and delete stack all element 
+while current element greater than st.top()
+
+and after that make a new llist and return it 
+
+hack:
+01. using monotonic stack 
+02. reversal of node 
+
+*/
+   
