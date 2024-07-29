@@ -1,0 +1,29 @@
+https://www.geeksforgeeks.org/problems/multiply-two-linked-lists/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+
+class solution {
+  public:
+    long long multiplyTwoLists(Node *first, Node *second) {
+        long long a = 0, b = 0;
+        while(first)
+        {
+            a = (a * 10) % 1000000007 + (first -> data);
+            first = first -> next;
+        }
+        while(second)
+        {
+            b =( b * 10) % 1000000007 + (second-> data);
+            second = second -> next;
+        }
+    
+        return (a * b) % 1000000007;
+    }
+};
+
+
+/*
+ps:
+It is very simple 
+what we have to do we are given two linked list 
+we have to multiply them and return the result 
+
