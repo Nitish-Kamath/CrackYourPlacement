@@ -1,0 +1,55 @@
+https://leetcode.com/problems/reverse-linked-list
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+
+        if(!head)
+        return NULL;
+
+      ListNode *tmp =  head;
+      ListNode *t1 = new ListNode(0);
+      ListNode *t2 = new ListNode(tmp->val);
+      tmp = tmp -> next;
+      while(tmp)
+      {
+        t1 = new ListNode(tmp->val);
+        t1 -> next = t2;
+        t2 = t1;
+        tmp = tmp -> next;
+      }
+    return t2;
+    }
+};
+
+/*
+ps: very simple 
+we have to basically reverse the llist 
+soln:
+soln01:
+we can store element in nums then reverse it and make new llist with that element 
+
+soln02:
+using two pointer 
+
+what if 
+-
+1 
+1 2 
+1 2 3 
+1 1 1 
+
+hack: using of two pointer for backward movement
+
+
+*/
