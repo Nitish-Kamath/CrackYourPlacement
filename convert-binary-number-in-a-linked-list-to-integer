@@ -1,0 +1,74 @@
+https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+
+        ListNode *temp;
+        temp = head;
+         int res = 0;
+        string str  =  "";
+
+        while(temp)
+        {
+            if((temp -> val) == 1)
+            str += '1';
+            else 
+            str +='0';
+
+            temp = temp -> next;
+
+        }
+
+        int t = 1;
+
+        for(int i = str.size() - 1;i >= 0;i--)
+        {
+            if(str[i] == '1')
+            res +=t;
+            t *= 2;
+        }
+        return res;
+    }
+};
+
+/*
+ps:
+we are given head of llist, val may be 0 or 1 
+we have to simply traverse it and convert the binary value into c/s decimal value 
+
+one problem is with constraint if you try to convert val into integer value 
+then will throw integer overflow
+so better to convert it into string
+
+soln:
+
+soln01:
+using stl method 
+binary string  to integer => stoi(str,0,2)
+interger to binary string => bitset<8>(val).to_string()
+
+soln02:
+using calculation
+
+what if:
+0 0 0 
+1 1 1 
+0 
+1 
+
+
+hack:
+-> use While Loop 
+*/
