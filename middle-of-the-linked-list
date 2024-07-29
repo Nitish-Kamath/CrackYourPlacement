@@ -1,0 +1,56 @@
+https://leetcode.com/problems/middle-of-the-linked-list
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+
+        int len = 0;
+        ListNode *temp = head;
+        while(head)
+        {
+            len++;
+            head = head -> next;
+        }
+        len = len/2;
+        int count= 0;
+        while(count < len)
+        {
+            count++;
+            temp = temp -> next;
+        }
+        return temp;
+    }
+};
+
+
+/*
+ps:
+Given that we have head pointer and we have to return from that node which lies in middle 
+or lies on second middle position 
+
+soln:
+we will first find length of llist 
+and do half as len/2 
+we will traverse till its length 
+
+what if:
+ 
+one node 
+two node 
+three node 
+
+
+hack:
+01: find length 
+
+*/
