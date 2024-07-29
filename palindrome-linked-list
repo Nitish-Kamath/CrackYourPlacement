@@ -1,0 +1,62 @@
+https://leetcode.com/problems/palindrome-linked-list
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+bool helper(string str)
+{
+    int start = 0;
+    int end = str.size() - 1;
+    while(start <= end)
+    {
+        if(str[start++] != str[end--])
+        return false;
+    }
+    return true;
+}
+
+    bool isPalindrome(ListNode* head) {
+        ListNode *temp = head;
+        string res = "";
+        while(temp)
+        {
+            res += to_string(temp->val);
+            temp = temp -> next;
+        }
+        return helper(res);
+    }
+};
+
+/*
+ps:
+very simple 
+we are given head of llist and we have to check if elements are in palindromic fashion or not 
+if yes
+return true 
+if no
+return false
+
+soln:
+we can just make a res string and check for the condition
+NOTE: Better not to make nums out of it because of the constraint bcz it will unsigned integer overflow
+
+what if: 
+1
+1 1  
+1 2 1 
+1 1 2 
+
+hack:
+01. convert into res string 
+
+*/
