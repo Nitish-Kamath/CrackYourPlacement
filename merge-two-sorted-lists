@@ -1,0 +1,84 @@
+https://leetcode.com/problems/merge-two-sorted-lists
+
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode *t1 = list1;
+        ListNode *t2 = list2;
+        ListNode *res = new ListNode(0);
+        ListNode *tmp = res;
+
+        while(t1  and t2)
+        {
+            int val1 = t1 -> val;
+            int val2 = t2 -> val;
+
+            if(val1 < val2)
+            {
+                res -> next = new ListNode(val1);
+                res = res -> next;
+                t1 = t1 -> next;
+            }
+
+            else if( val2 < val1)
+            {
+                res -> next = new ListNode(val2);
+                res = res -> next;
+                t2 = t2 -> next;
+            }
+            else 
+            {
+                res -> next = new ListNode(val1);
+                res = res -> next;
+                res -> next = new ListNode(val1);
+                res = res -> next;
+                t1 = t1 -> next;
+                t2 = t2 -> next;
+            }
+        }
+
+        while(t1)
+        {
+            res -> next = new ListNode(t1 -> val);
+            res = res -> next;
+            t1 = t1 -> next;
+        }
+        while(t2)
+        {
+            res -> next = new ListNode(t2 -> val);
+            res = res -> next;
+            t2 = t2 -> next;
+        }
+    
+    return  tmp -> next;
+    }
+};
+
+
+/*
+ps:
+given two llist, element in non-decreasing order 
+
+soln:
+we have two list and we have to merge
+so using three while loop we can merge it 
+
+what if:
+both empty 
+one empty 
+
+hack:
+01: use three while loop 
+
+*/
