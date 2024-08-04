@@ -1,0 +1,48 @@
+https://leetcode.com/problems/kth-largest-element-in-an-array
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+
+        priority_queue<int,vector<int>,greater<int>>minhp;
+
+        for(auto x : nums)
+        {
+
+            minhp.push(x);
+            if(minhp.size() > k)
+            minhp.pop();
+        }
+        return minhp.top();
+    }
+};
+
+
+/*
+ps:
+very easy 
+we are given a nums array 
+and we are given k value 
+and we have to return element that is at kth position after sorting in descending order
+
+note: elmenet may not be kth distince element 
+
+solution:
+what we can do we can make a minHeap 
+and put element as it is 
+and write condition if element exceeds than k then pop it 
+and end element at top will be required answer 
+
+what if : 
+2 2 2 and k = 1 
+2 2 2 and k = 2 
+2 2 2 and k = 3
+
+
+hack:
+01.minHeap
+
+
+
+
+*/
