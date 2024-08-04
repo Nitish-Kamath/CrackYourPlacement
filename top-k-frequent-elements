@@ -1,0 +1,56 @@
+https://leetcode.com/problems/top-k-frequent-elements
+class Solution {
+public:
+typedef pair<int,int> pr;
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+
+        unordered_map<int,int>mp;
+        priority_queue<pr,vector<pr>,greater<pr>> minHp;
+        vector<int>res;
+
+        for(auto x : nums)
+        mp[x]++;
+
+        for(auto x : mp)
+        {
+            minHp.push({x.second,x.first});
+            if(minHp.size() > k)
+            minHp.pop();
+        }
+
+        while(!minHp.empty())
+        {
+            res.push_back(minHp.top().second);
+            minHp.pop();
+        }
+        return res;
+    }
+};
+
+/*
+ps:
+very simple 
+here we are given nums array 
+and given k value (range from 1 to max unique element)
+
+we have to return an array element top k element having max frequency
+
+soln:
+since it is about frequency 
+so we can use maps to store frequency 
+sine we have to return top k element 
+so we will use minHeap
+
+what if:
+
+1 1 1 2 2 2  and k = 1 
+1 1 1 2 2 2  and k = 2 
+1 1 1 2 2    and k = 2 
+
+hack:
+01.map
+02.minHeap
+
+
+
+*/
