@@ -1,0 +1,74 @@
+https://leetcode.com/problems/find-the-most-competitive-subsequence
+
+
+class Solution {
+public:
+    vector<int> mostCompetitive(vector<int>& nums, int k) {
+
+        stack<int>st;
+        vector<int>res;
+
+        int rem = nums.size() - k;
+
+        for(auto x : nums)
+        {
+            while(!st.empty() and rem and x < st.top() )
+            {
+                rem--;
+                st.pop();
+            }
+            st.push(x);
+        }
+        
+        while(rem)
+        {
+        st.pop();
+        rem--;
+        }
+
+        while(!st.empty())
+        {
+            res.insert(res.begin(),st.top());
+            st.pop();
+        }
+
+         return res;
+    }
+};
+
+
+/*
+ps:
+very simple 
+we are given a nums array and value k 
+and we have to return an array of size k 
+such that it is most competitive 
+
+soln:
+
+so what we think 
+let suppose we have nums array of 5 element and k = 2
+it means that in res array we have 2 element 
+and we must delete remaining 5- 2 = 3 element from nums array 
+[it is used so that we have k element at end in stack ]
+
+using while loop we will check if current elemnet is less than previous element 
+if yes 
+if rem != 0 we can delete previous element and put currnet element in stack 
+if rem == 0 we cann't delete and put all elmeent in stack 
+
+if no 
+simply put in stack 
+
+what if:
+3 5 2 6 and k = 1 
+3 5 2 6 and k = 2 
+3 5 2 6 and k = 3 
+3 5 2 6 and k = 4 
+1 2 3 4 andk k = 2
+4 3 2 1 and k = 2 
+
+hack:
+01:stack
+
+*/
