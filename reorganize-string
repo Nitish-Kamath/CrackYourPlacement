@@ -1,0 +1,88 @@
+https://leetcode.com/problems/reorganize-string
+
+
+
+class Solution {
+public:
+    string reorganizeString(string s) {
+        
+        map<char,int> mp;
+        for(auto x : s)
+        mp[x]++;
+
+        string res = "";
+
+        priority_queue<pair<int,char>>pq;
+
+        for(auto x : mp)
+        pq.push({x.second,x.first});
+
+
+        while(pq.size() > 1)
+        {
+          auto it1 = pq.top();
+          pq.pop();
+          auto it2 = pq.top();
+          pq.pop();
+
+          res += it1.second;
+          res += it2.second;
+
+          it1.first--;
+          it2.first--;
+
+          if(it1.first != 0)
+          pq.push(it1);
+          if(it2.first != 0)
+          pq.push(it2);
+
+        }
+
+        if(pq.size() != 0)
+        {
+            auto it = pq.top();
+            if(it.first != 1)
+            return "";
+            res += it.second;
+        }
+
+        return res;
+    }
+};
+
+
+/*
+ps:
+very simple 
+here we are given a string and we have to reorganise the string in such a fashion such that 
+no two adjacnet character is same
+
+solution:
+we can use a map for each element key will be char element and value will be its frequency
+then we can use max heap and we will check if there is two element 
+if yes  add both element to res string and decrease its freq by one 
+if freq is zero don't push it otherwise push it to heap 
+
+if no
+then come out of loop 
+and check if last elemetn has freq of 1 if yes 
+then add that to end of res string and return 
+if not then return ""
+
+
+
+what if:
+aaaaa
+aaab
+aabbcc 
+aaabb
+abcde
+a
+aa
+
+hack:
+01.map
+02.max heap as pair<int,char> first element as frequeny and second element as char itself
+
+
+*/
