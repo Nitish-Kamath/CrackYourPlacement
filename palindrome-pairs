@@ -1,0 +1,67 @@
+https://leetcode.com/problems/palindrome-pairs
+class Solution {
+    struct Node{
+        map<char, Node*> cont;
+        int idx;
+        Node() : idx(-1) {}
+    };
+    private:
+    Node* root = new Node();
+    void add_word(string s, int idx){
+        Node* node = root;
+        int ni = s.size()-1;
+        while(ni >= 0){
+            if(node->cont.count(s[ni]) == 0){
+                Node* new_node = new Node();
+                node->cont[s[ni]] = new_node;
+            }
+            node = node->cont[s[ni]];
+            ni--;
+        }
+        node->idx = idx;
+    }
+    void find_pal(string s, int idx, vector<vector<int>>& found){
+        Node* node = root;
+        int ni = 0;
+        while(ni < s.size()){
+            if(node->idx > -1 && is_palindrome(s.substr(ni))) found.push_back({idx, node->idx});
+            if(node->cont.count(s[ni]) == 0) return;
+            node = node->cont[s[ni++]];
+        }
+        queue<pair<Node*, string>> my_q;
+        my_q.push({node, ""});
+        while(!my_q.empty()){
+            pair<Node*, string> cur_p = my_q.front();
+            my_q.pop();
+            if(cur_p.first->idx > -1 && is_palindrome(cur_p.second) && cur_p.first->idx != idx) 
+                found.push_back({idx, cur_p.first->idx});
+            for(auto& x: cur_p.first->cont){
+                if(x.second){
+                    my_q.push({x.second, cur_p.second + x.first});
+                }
+            }
+        }
+        return;
+    }
+    bool is_palindrome(string s){
+        if(s.size() < 2) return true;
+        int l = 0, r = s.size()-1;
+        while(l < r){
+            if(s[l] != s[r]) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+public:
+    vector<vector<int>> palindromePairs(vector<string>& words) {
+        vector<vector<int>> found;
+        for(int ni = 0; ni < words.size(); ni++){
+            add_word(words[ni], ni);
+        }
+        for(int ni = 0; ni < words.size(); ni++){
+            find_pal(words[ni], ni, found);
+        }
+        return found;
+    }
+};
